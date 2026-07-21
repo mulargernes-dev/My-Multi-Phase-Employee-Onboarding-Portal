@@ -34,8 +34,7 @@ const previewCurrent = document.querySelector('#previewCurrent');
 const previewPermanent = document.querySelector('#previewPermanent');
 const restartBtnPhase3 = document.querySelector('#restartBtnPhase3');
 
-const savedFirstName = localStorage.getItem('savedFirstName');
-const savedLastName = localStorage.getItem('savedLastName');
+
 
 
 // TRANSITION ACTION 1: Processing Name Streams
