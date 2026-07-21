@@ -36,8 +36,7 @@ const restartBtnPhase3 = document.querySelector('#restartBtnPhase3');
 
 const savedFirstName = localStorage.getItem('savedFirstName');
 const savedLastName = localStorage.getItem('savedLastName');
-if (savedFirstName) firstName.value = savedFirstName;
-if (savedLastName) lastName.value = savedLastName;
+
 
 // TRANSITION ACTION 1: Processing Name Streams
 nextToPhase2.addEventListener('click', () => {
