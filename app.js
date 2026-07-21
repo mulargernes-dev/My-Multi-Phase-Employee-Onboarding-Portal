@@ -27,13 +27,17 @@ const currentAge = document.querySelector('#currentAge');
 const currentAddress = document.querySelector('#currentAddress');
 const permanentAddress = document.querySelector('#permanentAddress');
 const currentBirthday = document.querySelector('#currentBirthday');
-const genderInputs = document.querySelectorAll('input[name="gender"]');
 
 // Target Previews Injections Nodes Selection
 const previewName = document.querySelector('#previewName');
 const previewCurrent = document.querySelector('#previewCurrent');
 const previewPermanent = document.querySelector('#previewPermanent');
 const restartBtnPhase3 = document.querySelector('#restartBtnPhase3');
+
+const savedFirstName = localStorage.getItem('savedFirstName');
+const savedLastName = localStorage.getItem('savedLastName');
+if (savedFirstName) firstName.value = savedFirstName;
+if (savedLastName) lastName.value = savedLastName;
 
 // TRANSITION ACTION 1: Processing Name Streams
 nextToPhase2.addEventListener('click', () => {
@@ -47,12 +51,11 @@ nextToPhase2.addEventListener('click', () => {
     const eNameClean = extName.value.trim();
     const caNameClean = currentAge.value.trim();
     const cbNameClean = currentBirthday.value.trim();
-    const cgNameClean = Array.from(genderInputs).find(input => input.checked)?.value || "";
     const ageValue = Number(caNameClean);
 
-    if (fNameClean === "" || lNameClean === "" || mNameClean === "" || eNameClean === "" || caNameClean === "" || cbNameClean === "" || cgNameClean === "") {
+    if (fNameClean === "" || lNameClean === "" || mNameClean === "" || eNameClean === "" || caNameClean === "" || cbNameClean === "") {
         validationAlert.classList.remove('d-none');
-        validationAlert.textContent = "Validation Failure: All name, age, gender, and birthday fields are required.";
+        validationAlert.textContent = "Validation Failure: All name, age, and birthday fields are required.";
         return;
     }
     else if (/^\d+$/.test(fNameClean) || /^\d+$/.test(lNameClean) || /^\d+$/.test(mNameClean) || /^\d+$/.test(eNameClean)) {
@@ -77,6 +80,10 @@ nextToPhase2.addEventListener('click', () => {
     }
 
     else {
+        // remember basic user identity for future visits
+        localStorage.setItem('savedFirstName', fNameClean);
+        localStorage.setItem('savedLastName', lNameClean);
+
         // Advance visual stage indicator layout frames
         phase1.classList.add('d-none');
         phase2.classList.remove('d-none');
@@ -128,7 +135,6 @@ function resetForm() {
     extName.value = "";
     currentAge.value = "";
     currentBirthday.value = "";
-    genderInputs.forEach(input => input.checked = false);
     currentAddress.value = "";
     permanentAddress.value = "";
     previewName.textContent = "--";
